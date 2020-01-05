@@ -19,7 +19,7 @@ PowerDNS Server service monitoring template. This template is using:
 - SVC::pdns_server::queries
 
 <p align=center>
-(img/pdns_server_queries_small.png)
+![Queries graph](../img/pdns_server_queries_small.png)
 </p>
 
 #### Triggers
