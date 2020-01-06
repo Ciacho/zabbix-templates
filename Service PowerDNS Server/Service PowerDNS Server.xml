@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
   <version>4.4</version>
-  <date>2020-01-06T21:07:59Z</date>
+  <date>2020-01-06T21:18:01Z</date>
   <groups>
     <group>
       <name>Templates</name>
@@ -13,7 +13,7 @@
       <name>Service PowerDNS Server</name>
       <description>PowerDNS Server (authoritative) monitoring template&#13;
 &#13;
-Version: devel&#13;
+Version: 1.0.1&#13;
 &#13;
 #### Notes:&#13;
 - To use this template add pdns.conf configuration file:&#13;
@@ -30,6 +30,430 @@ webserver-port=8081&#13;
           <name>Templates</name>
         </group>
       </groups>
+      <applications>
+        <application>
+          <name>SVC::pdns_server</name>
+        </application>
+        <application>
+          <name>SVC::pdns_server::connections</name>
+        </application>
+      </applications>
+      <items>
+        <item>
+          <name>incoming-notifications</name>
+          <type>DEPENDENT</type>
+          <key>pdns_server[incoming-notifications]</key>
+          <delay>0</delay>
+          <value_type>FLOAT</value_type>
+          <units>qps</units>
+          <description>NOTIFY packets received</description>
+          <applications>
+            <application>
+              <name>SVC::pdns_server::connections</name>
+            </application>
+          </applications>
+          <preprocessing>
+            <step>
+              <type>REGEX</type>
+              <params>&lt;td&gt;incoming-notifications&lt;/td&gt;&lt;td&gt;(.*)
+\0</params>
+            </step>
+            <step>
+              <type>REGEX</type>
+              <params>\d+
+\0</params>
+            </step>
+            <step>
+              <type>CHANGE_PER_SECOND</type>
+              <params/>
+            </step>
+          </preprocessing>
+          <master_item>
+            <key>web.page.get[{$SVC_PDNS_SERVER_IP},/,{$SVC_PDNS_SERVER_PORT}]</key>
+          </master_item>
+        </item>
+        <item>
+          <name>overload-drops</name>
+          <type>DEPENDENT</type>
+          <key>pdns_server[overload-drops]</key>
+          <delay>0</delay>
+          <value_type>FLOAT</value_type>
+          <units>qps</units>
+          <description>Queries dropped because backends overloaded</description>
+          <applications>
+            <application>
+              <name>SVC::pdns_server::connections</name>
+            </application>
+          </applications>
+          <preprocessing>
+            <step>
+              <type>REGEX</type>
+              <params>&lt;td&gt;overload-drops&lt;/td&gt;&lt;td&gt;(.*)
+\0</params>
+            </step>
+            <step>
+              <type>REGEX</type>
+              <params>\d+
+\0</params>
+            </step>
+            <step>
+              <type>CHANGE_PER_SECOND</type>
+              <params/>
+            </step>
+          </preprocessing>
+          <master_item>
+            <key>web.page.get[{$SVC_PDNS_SERVER_IP},/,{$SVC_PDNS_SERVER_PORT}]</key>
+          </master_item>
+        </item>
+        <item>
+          <name>query-cache-hit</name>
+          <type>DEPENDENT</type>
+          <key>pdns_server[query-cache-hit]</key>
+          <delay>0</delay>
+          <value_type>FLOAT</value_type>
+          <units>qps</units>
+          <description>Number of hits on the query cache</description>
+          <applications>
+            <application>
+              <name>SVC::pdns_server::connections</name>
+            </application>
+          </applications>
+          <preprocessing>
+            <step>
+              <type>REGEX</type>
+              <params>&lt;td&gt;query-cache-hit&lt;/td&gt;&lt;td&gt;(.*)
+\0</params>
+            </step>
+            <step>
+              <type>REGEX</type>
+              <params>\d+
+\0</params>
+            </step>
+            <step>
+              <type>CHANGE_PER_SECOND</type>
+              <params/>
+            </step>
+          </preprocessing>
+          <master_item>
+            <key>web.page.get[{$SVC_PDNS_SERVER_IP},/,{$SVC_PDNS_SERVER_PORT}]</key>
+          </master_item>
+        </item>
+        <item>
+          <name>query-cache-miss</name>
+          <type>DEPENDENT</type>
+          <key>pdns_server[query-cache-miss]</key>
+          <delay>0</delay>
+          <value_type>FLOAT</value_type>
+          <units>qps</units>
+          <description>Number of misses on the query cache</description>
+          <applications>
+            <application>
+              <name>SVC::pdns_server::connections</name>
+            </application>
+          </applications>
+          <preprocessing>
+            <step>
+              <type>REGEX</type>
+              <params>&lt;td&gt;query-cache-miss&lt;/td&gt;&lt;td&gt;(.*)
+\0</params>
+            </step>
+            <step>
+              <type>REGEX</type>
+              <params>\d+
+\0</params>
+            </step>
+            <step>
+              <type>CHANGE_PER_SECOND</type>
+              <params/>
+            </step>
+          </preprocessing>
+          <master_item>
+            <key>web.page.get[{$SVC_PDNS_SERVER_IP},/,{$SVC_PDNS_SERVER_PORT}]</key>
+          </master_item>
+        </item>
+        <item>
+          <name>real-memory-usage</name>
+          <type>DEPENDENT</type>
+          <key>pdns_server[real-memory-usage]</key>
+          <delay>0</delay>
+          <value_type>FLOAT</value_type>
+          <units>B</units>
+          <description>Actual unique use of memory in bytes (approx)</description>
+          <applications>
+            <application>
+              <name>SVC::pdns_server</name>
+            </application>
+          </applications>
+          <preprocessing>
+            <step>
+              <type>REGEX</type>
+              <params>&lt;td&gt;real-memory-usage&lt;/td&gt;&lt;td&gt;(.*)
+\0</params>
+            </step>
+            <step>
+              <type>REGEX</type>
+              <params>\d+
+\0</params>
+            </step>
+          </preprocessing>
+          <master_item>
+            <key>web.page.get[{$SVC_PDNS_SERVER_IP},/,{$SVC_PDNS_SERVER_PORT}]</key>
+          </master_item>
+        </item>
+        <item>
+          <name>tcp-answers</name>
+          <type>DEPENDENT</type>
+          <key>pdns_server[tcp-answers]</key>
+          <delay>0</delay>
+          <value_type>FLOAT</value_type>
+          <units>qps</units>
+          <description>Number of answers sent out over TCP</description>
+          <applications>
+            <application>
+              <name>SVC::pdns_server::connections</name>
+            </application>
+          </applications>
+          <preprocessing>
+            <step>
+              <type>REGEX</type>
+              <params>&lt;td&gt;tcp-answers&lt;/td&gt;&lt;td&gt;(.*)
+\0</params>
+            </step>
+            <step>
+              <type>REGEX</type>
+              <params>\d+
+\0</params>
+            </step>
+            <step>
+              <type>CHANGE_PER_SECOND</type>
+              <params/>
+            </step>
+          </preprocessing>
+          <master_item>
+            <key>web.page.get[{$SVC_PDNS_SERVER_IP},/,{$SVC_PDNS_SERVER_PORT}]</key>
+          </master_item>
+        </item>
+        <item>
+          <name>tcp-queries</name>
+          <type>DEPENDENT</type>
+          <key>pdns_server[tcp-queries]</key>
+          <delay>0</delay>
+          <value_type>FLOAT</value_type>
+          <units>qps</units>
+          <description>Number of TCP queries received</description>
+          <applications>
+            <application>
+              <name>SVC::pdns_server::connections</name>
+            </application>
+          </applications>
+          <preprocessing>
+            <step>
+              <type>REGEX</type>
+              <params>&lt;td&gt;tcp-queries&lt;/td&gt;&lt;td&gt;(.*)
+\0</params>
+            </step>
+            <step>
+              <type>REGEX</type>
+              <params>\d+
+\0</params>
+            </step>
+            <step>
+              <type>CHANGE_PER_SECOND</type>
+              <params/>
+            </step>
+          </preprocessing>
+          <master_item>
+            <key>web.page.get[{$SVC_PDNS_SERVER_IP},/,{$SVC_PDNS_SERVER_PORT}]</key>
+          </master_item>
+        </item>
+        <item>
+          <name>udp-answers</name>
+          <type>DEPENDENT</type>
+          <key>pdns_server[udp-answers]</key>
+          <delay>0</delay>
+          <value_type>FLOAT</value_type>
+          <units>qps</units>
+          <description>Number of answers sent out over UDP</description>
+          <applications>
+            <application>
+              <name>SVC::pdns_server::connections</name>
+            </application>
+          </applications>
+          <preprocessing>
+            <step>
+              <type>REGEX</type>
+              <params>&lt;td&gt;udp-answers&lt;/td&gt;&lt;td&gt;(.*)
+\0</params>
+            </step>
+            <step>
+              <type>REGEX</type>
+              <params>\d+
+\0</params>
+            </step>
+            <step>
+              <type>CHANGE_PER_SECOND</type>
+              <params/>
+            </step>
+          </preprocessing>
+          <master_item>
+            <key>web.page.get[{$SVC_PDNS_SERVER_IP},/,{$SVC_PDNS_SERVER_PORT}]</key>
+          </master_item>
+        </item>
+        <item>
+          <name>udp-queries</name>
+          <type>DEPENDENT</type>
+          <key>pdns_server[udp-queries]</key>
+          <delay>0</delay>
+          <value_type>FLOAT</value_type>
+          <units>qps</units>
+          <description>Number of UDP queries received</description>
+          <applications>
+            <application>
+              <name>SVC::pdns_server::connections</name>
+            </application>
+          </applications>
+          <preprocessing>
+            <step>
+              <type>REGEX</type>
+              <params>&lt;td&gt;udp-queries&lt;/td&gt;&lt;td&gt;(.*)
+\0</params>
+            </step>
+            <step>
+              <type>REGEX</type>
+              <params>\d+
+\0</params>
+            </step>
+            <step>
+              <type>CHANGE_PER_SECOND</type>
+              <params/>
+            </step>
+          </preprocessing>
+          <master_item>
+            <key>web.page.get[{$SVC_PDNS_SERVER_IP},/,{$SVC_PDNS_SERVER_PORT}]</key>
+          </master_item>
+        </item>
+        <item>
+          <name>uptime</name>
+          <type>DEPENDENT</type>
+          <key>pdns_server[uptime]</key>
+          <delay>0</delay>
+          <units>s</units>
+          <description>Uptime of process in seconds</description>
+          <applications>
+            <application>
+              <name>SVC::pdns_server</name>
+            </application>
+          </applications>
+          <preprocessing>
+            <step>
+              <type>REGEX</type>
+              <params>&lt;tr&gt;&lt;td&gt;uptime&lt;/td&gt;&lt;td&gt;(.*)
+\0</params>
+            </step>
+            <step>
+              <type>REGEX</type>
+              <params>\d+
+\0</params>
+            </step>
+          </preprocessing>
+          <master_item>
+            <key>web.page.get[{$SVC_PDNS_SERVER_IP},/,{$SVC_PDNS_SERVER_PORT}]</key>
+          </master_item>
+          <triggers>
+            <trigger>
+              <expression>{last(0)}&lt;10m</expression>
+              <name>SVC::pdns_server has just (re)started</name>
+              <priority>WARNING</priority>
+              <description>Process pdns_server has been (re)started at least 10m ago.</description>
+              <dependencies>
+                <dependency>
+                  <name>SVC::pdns_server process is DOWN</name>
+                  <expression>{Service PowerDNS Server:proc.num[pdns_server,pdns].last()}=0</expression>
+                </dependency>
+              </dependencies>
+            </trigger>
+          </triggers>
+        </item>
+        <item>
+          <name>version</name>
+          <type>DEPENDENT</type>
+          <key>pdns_server[version]</key>
+          <delay>0</delay>
+          <trends>0</trends>
+          <value_type>CHAR</value_type>
+          <description>Version of the pdns server.</description>
+          <applications>
+            <application>
+              <name>SVC::pdns_server</name>
+            </application>
+          </applications>
+          <preprocessing>
+            <step>
+              <type>REGEX</type>
+              <params>&lt;a href="/" id="appname"&gt;(.*)&lt;/a&gt;
+\1</params>
+            </step>
+          </preprocessing>
+          <master_item>
+            <key>web.page.get[{$SVC_PDNS_SERVER_IP},/,{$SVC_PDNS_SERVER_PORT}]</key>
+          </master_item>
+          <triggers>
+            <trigger>
+              <expression>{diff(10)}&gt;0</expression>
+              <name>SVC::pdns_server::version has changed to {ITEM.LASTVALUE}</name>
+              <priority>INFO</priority>
+              <description>Version of the PowerDNS Server has been changed.</description>
+            </trigger>
+          </triggers>
+        </item>
+        <item>
+          <name>MEM::pdns_server</name>
+          <type>ZABBIX_ACTIVE</type>
+          <key>proc.mem[pdns_server]</key>
+          <units>B</units>
+          <description>Total memory usage by all pdns_server processes.</description>
+          <applications>
+            <application>
+              <name>SVC::pdns_server</name>
+            </application>
+          </applications>
+        </item>
+        <item>
+          <name>PROC::pdns_server</name>
+          <type>ZABBIX_ACTIVE</type>
+          <key>proc.num[pdns_server,pdns]</key>
+          <units>processes</units>
+          <description>Number pans_server processes.</description>
+          <applications>
+            <application>
+              <name>SVC::pdns_server</name>
+            </application>
+          </applications>
+          <triggers>
+            <trigger>
+              <expression>{last()}=0</expression>
+              <name>SVC::pdns_server process is DOWN</name>
+              <priority>DISASTER</priority>
+              <description>The pdns_server main process is not running.&#13;
+Please confirm the state.</description>
+            </trigger>
+          </triggers>
+        </item>
+        <item>
+          <name>pdns_server</name>
+          <type>ZABBIX_ACTIVE</type>
+          <key>web.page.get[{$SVC_PDNS_SERVER_IP},/,{$SVC_PDNS_SERVER_PORT}]</key>
+          <delay>30s</delay>
+          <history>0</history>
+          <trends>0</trends>
+          <value_type>TEXT</value_type>
+          <applications>
+            <application>
+              <name>SVC::pdns_server</name>
+            </application>
+          </applications>
+        </item>
+      </items>
       <macros>
         <macro>
           <macro>{$SVC_PDNS_SERVER_IP}</macro>
@@ -40,6 +464,190 @@ webserver-port=8081&#13;
           <value>8081</value>
         </macro>
       </macros>
+      <screens>
+        <screen>
+          <name>SVC::pdns_server</name>
+          <hsize>2</hsize>
+          <vsize>2</vsize>
+          <screen_items>
+            <screen_item>
+              <resourcetype>3</resourcetype>
+              <style>0</style>
+              <resource>
+                <key>pdns_server[version]</key>
+                <host>Service PowerDNS Server</host>
+              </resource>
+              <width>500</width>
+              <height>100</height>
+              <x>0</x>
+              <y>0</y>
+              <colspan>1</colspan>
+              <rowspan>1</rowspan>
+              <elements>1</elements>
+              <valign>1</valign>
+              <halign>0</halign>
+              <dynamic>0</dynamic>
+              <sort_triggers>0</sort_triggers>
+              <url/>
+              <application/>
+              <max_columns>3</max_columns>
+            </screen_item>
+            <screen_item>
+              <resourcetype>0</resourcetype>
+              <style>0</style>
+              <resource>
+                <name>SVC::pdns_server::memory</name>
+                <host>Service PowerDNS Server</host>
+              </resource>
+              <width>600</width>
+              <height>200</height>
+              <x>1</x>
+              <y>0</y>
+              <colspan>1</colspan>
+              <rowspan>1</rowspan>
+              <elements>0</elements>
+              <valign>1</valign>
+              <halign>1</halign>
+              <dynamic>0</dynamic>
+              <sort_triggers>0</sort_triggers>
+              <url/>
+              <application/>
+              <max_columns>3</max_columns>
+            </screen_item>
+            <screen_item>
+              <resourcetype>0</resourcetype>
+              <style>0</style>
+              <resource>
+                <name>SVC::pdns_server::queries</name>
+                <host>Service PowerDNS Server</host>
+              </resource>
+              <width>600</width>
+              <height>200</height>
+              <x>0</x>
+              <y>1</y>
+              <colspan>1</colspan>
+              <rowspan>1</rowspan>
+              <elements>0</elements>
+              <valign>1</valign>
+              <halign>1</halign>
+              <dynamic>0</dynamic>
+              <sort_triggers>0</sort_triggers>
+              <url/>
+              <application/>
+              <max_columns>3</max_columns>
+            </screen_item>
+            <screen_item>
+              <resourcetype>0</resourcetype>
+              <style>0</style>
+              <resource>
+                <name>SVC::pdns_server::answers</name>
+                <host>Service PowerDNS Server</host>
+              </resource>
+              <width>600</width>
+              <height>200</height>
+              <x>1</x>
+              <y>1</y>
+              <colspan>1</colspan>
+              <rowspan>1</rowspan>
+              <elements>0</elements>
+              <valign>1</valign>
+              <halign>1</halign>
+              <dynamic>0</dynamic>
+              <sort_triggers>0</sort_triggers>
+              <url/>
+              <application/>
+              <max_columns>3</max_columns>
+            </screen_item>
+          </screen_items>
+        </screen>
+      </screens>
     </template>
   </templates>
+  <graphs>
+    <graph>
+      <name>SVC::pdns_server::answers</name>
+      <width>1200</width>
+      <height>300</height>
+      <type>STACKED</type>
+      <graph_items>
+        <graph_item>
+          <color>DD0000</color>
+          <item>
+            <host>Service PowerDNS Server</host>
+            <key>pdns_server[tcp-answers]</key>
+          </item>
+        </graph_item>
+        <graph_item>
+          <sortorder>1</sortorder>
+          <color>00BB00</color>
+          <item>
+            <host>Service PowerDNS Server</host>
+            <key>pdns_server[udp-answers]</key>
+          </item>
+        </graph_item>
+      </graph_items>
+    </graph>
+    <graph>
+      <name>SVC::pdns_server::memory</name>
+      <width>1200</width>
+      <height>300</height>
+      <graph_items>
+        <graph_item>
+          <drawtype>BOLD_LINE</drawtype>
+          <color>DD0000</color>
+          <item>
+            <host>Service PowerDNS Server</host>
+            <key>pdns_server[real-memory-usage]</key>
+          </item>
+        </graph_item>
+      </graph_items>
+    </graph>
+    <graph>
+      <name>SVC::pdns_server::queries</name>
+      <width>1200</width>
+      <height>300</height>
+      <type>STACKED</type>
+      <graph_items>
+        <graph_item>
+          <color>DD0000</color>
+          <item>
+            <host>Service PowerDNS Server</host>
+            <key>pdns_server[tcp-queries]</key>
+          </item>
+        </graph_item>
+        <graph_item>
+          <sortorder>1</sortorder>
+          <color>00BB00</color>
+          <item>
+            <host>Service PowerDNS Server</host>
+            <key>pdns_server[udp-queries]</key>
+          </item>
+        </graph_item>
+      </graph_items>
+    </graph>
+    <graph>
+      <name>SVC::pdns_server::query cache</name>
+      <width>1200</width>
+      <height>300</height>
+      <graph_items>
+        <graph_item>
+          <drawtype>BOLD_LINE</drawtype>
+          <color>DD0000</color>
+          <item>
+            <host>Service PowerDNS Server</host>
+            <key>pdns_server[query-cache-hit]</key>
+          </item>
+        </graph_item>
+        <graph_item>
+          <sortorder>1</sortorder>
+          <drawtype>BOLD_LINE</drawtype>
+          <color>00BB00</color>
+          <item>
+            <host>Service PowerDNS Server</host>
+            <key>pdns_server[query-cache-miss]</key>
+          </item>
+        </graph_item>
+      </graph_items>
+    </graph>
+  </graphs>
 </zabbix_export>
