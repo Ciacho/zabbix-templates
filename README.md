@@ -7,7 +7,26 @@ This repository provides a set of templates which offers the alternative set of 
 
 ## Changelog
 ### (devel)
-- PowerDNS Server (Authoritative)
+See ![devel tree](https://github.com/Ciacho/zabbix-templates/tree/devel)
+### 1.0.2
+- **PowerDNS Server**
+  - 1.0.2
+    - Triggers:
+      - SVC::pdns_server has just (re)started
+      - SVC::pdns_server version has changed  
+    - Items:
+      - incoming-notifications
+      - overload-drops
+      - query-cache-hit
+      - query-cache-miss
+      - real-memory-usage
+      - uptime
+      - version
+    - Graphs:
+      - SVC::pdns_server::query cache
+### 1.0.1
+- **PowerDNS Server**
+  - initial Version
 
 
 ## List of templates:
