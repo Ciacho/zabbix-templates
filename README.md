@@ -1,5 +1,7 @@
 # Zabbix templates
 
+[![License: CC BY-SA](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)
+
 This repository provides a set of templates which offers the alternative set of templates to supplied by Zabbix.
 
 
@@ -8,8 +10,12 @@ This repository provides a set of templates which offers the alternative set of 
 - PowerDNS Server (Authoritative)
 
 
+## List of templates:
+- [PowerDNS Server](https://github.com/Ciacho/zabbix-templates/tree/master/Service%20PowerDNS%20Server)
+
+
 ## Notes
-- The naming pattern (application, items and triggers) is based on [Kloczek templates](https://github.com/kloczek/zabbix-templates):
+- The naming pattern (application, items and triggers) is based on [Kloczek templates](https://github.com/kloczek/zabbix-templates)
 * Each template has own version tag which is the copy of the whole zabbix-templates package version tag in which last changes has released
 * Each template in the description field has the last modification date and internal version
 * If it is something which needs to be done to use those templates it is described in each template within description notes
@@ -31,17 +37,7 @@ This repository provides a set of templates which offers the alternative set of 
 * Do not use {HOSTNAME} macros in triggers. In web frontend from Monitoring -> Triggers table has "host" column with the host name of the the active trigger. Repeating second time this hos name in the trigger name it is waste of space on the web page.
 * All zabbix agent items should be specified as ```zabbix agent (active)``` items.
 * All graphs resolution needs to be 1200x300.
-* Trigger severities:
-  * Disaster:
-  * High:
-  * Average:
-  * Warning:
-  * Information:
-  * Not classified:
-    - Version has changed
-    - Configuration parametr has changed
 
+##### Copyright (C) 2017-2020 Tomasz T. Ciaszczyk <tomasz@ciaszczyk.art.pl>
 
-#### Copyright (C) 2017-2020 Tomasz T. Ciaszczyk <tomasz@ciaszczyk.pl>
-
-#### This program is free software, distributed under the terms of the CC BY-SA. [![License: CC BY-SA](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)
+##### This program is free software, distributed under the terms of the CC BY-SA.
