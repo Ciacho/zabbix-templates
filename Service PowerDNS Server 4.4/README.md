@@ -5,7 +5,7 @@
 PowerDNS Server service monitoring template. This template is using:
 - Zabbix active agent items
 - powerdns webserver api (over http://localhost:8081)
-- tested on Zabbix 4.0.x and PowerDNS 4.2
+- This version is for Zabbix 4.4 
 
 #### Macros used by template:
 | Macro                    | Default value       | Description                                         |
