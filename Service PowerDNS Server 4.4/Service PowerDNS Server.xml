@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
   <version>4.4</version>
-  <date>2020-01-06T21:35:52Z</date>
+  <date>2020-01-26T20:49:28Z</date>
   <groups>
     <group>
       <name>Templates</name>
@@ -55,13 +55,8 @@ webserver-port=8081&#13;
           <preprocessing>
             <step>
               <type>REGEX</type>
-              <params>&lt;td&gt;incoming-notifications&lt;/td&gt;&lt;td&gt;(.*)
-\0</params>
-            </step>
-            <step>
-              <type>REGEX</type>
-              <params>\d+
-\0</params>
+              <params>&lt;td&gt;incoming-notifications&lt;/td&gt;&lt;td&gt;(\d+)&lt;/td&gt;
+\1</params>
             </step>
             <step>
               <type>CHANGE_PER_SECOND</type>
@@ -88,13 +83,8 @@ webserver-port=8081&#13;
           <preprocessing>
             <step>
               <type>REGEX</type>
-              <params>&lt;td&gt;overload-drops&lt;/td&gt;&lt;td&gt;(.*)
-\0</params>
-            </step>
-            <step>
-              <type>REGEX</type>
-              <params>\d+
-\0</params>
+              <params>&lt;td&gt;overload-drops&lt;/td&gt;&lt;td&gt;(\d+)&lt;/td&gt;
+\1</params>
             </step>
             <step>
               <type>CHANGE_PER_SECOND</type>
@@ -121,13 +111,8 @@ webserver-port=8081&#13;
           <preprocessing>
             <step>
               <type>REGEX</type>
-              <params>&lt;td&gt;query-cache-hit&lt;/td&gt;&lt;td&gt;(.*)
-\0</params>
-            </step>
-            <step>
-              <type>REGEX</type>
-              <params>\d+
-\0</params>
+              <params>&lt;td&gt;query-cache-hit&lt;/td&gt;&lt;td&gt;(\d+)&lt;/td&gt;
+\1</params>
             </step>
             <step>
               <type>CHANGE_PER_SECOND</type>
@@ -154,13 +139,8 @@ webserver-port=8081&#13;
           <preprocessing>
             <step>
               <type>REGEX</type>
-              <params>&lt;td&gt;query-cache-miss&lt;/td&gt;&lt;td&gt;(.*)
-\0</params>
-            </step>
-            <step>
-              <type>REGEX</type>
-              <params>\d+
-\0</params>
+              <params>&lt;td&gt;query-cache-miss&lt;/td&gt;&lt;td&gt;(\d+)&lt;/td&gt;
+\1</params>
             </step>
             <step>
               <type>CHANGE_PER_SECOND</type>
@@ -187,13 +167,8 @@ webserver-port=8081&#13;
           <preprocessing>
             <step>
               <type>REGEX</type>
-              <params>&lt;td&gt;real-memory-usage&lt;/td&gt;&lt;td&gt;(.*)
-\0</params>
-            </step>
-            <step>
-              <type>REGEX</type>
-              <params>\d+
-\0</params>
+              <params>&lt;td&gt;real-memory-usage&lt;/td&gt;&lt;td&gt;(\d+)&lt;/td&gt;
+\1</params>
             </step>
           </preprocessing>
           <master_item>
@@ -216,13 +191,8 @@ webserver-port=8081&#13;
           <preprocessing>
             <step>
               <type>REGEX</type>
-              <params>&lt;td&gt;tcp-answers&lt;/td&gt;&lt;td&gt;(.*)
-\0</params>
-            </step>
-            <step>
-              <type>REGEX</type>
-              <params>\d+
-\0</params>
+              <params>&lt;td&gt;tcp-answers&lt;/td&gt;&lt;td&gt;(\d+)&lt;/td&gt;
+\1</params>
             </step>
             <step>
               <type>CHANGE_PER_SECOND</type>
@@ -249,13 +219,8 @@ webserver-port=8081&#13;
           <preprocessing>
             <step>
               <type>REGEX</type>
-              <params>&lt;td&gt;tcp-queries&lt;/td&gt;&lt;td&gt;(.*)
-\0</params>
-            </step>
-            <step>
-              <type>REGEX</type>
-              <params>\d+
-\0</params>
+              <params>&lt;td&gt;tcp-queries&lt;/td&gt;&lt;td&gt;(\d+)&lt;/td&gt;
+\1</params>
             </step>
             <step>
               <type>CHANGE_PER_SECOND</type>
@@ -282,13 +247,8 @@ webserver-port=8081&#13;
           <preprocessing>
             <step>
               <type>REGEX</type>
-              <params>&lt;td&gt;udp-answers&lt;/td&gt;&lt;td&gt;(.*)
-\0</params>
-            </step>
-            <step>
-              <type>REGEX</type>
-              <params>\d+
-\0</params>
+              <params>&lt;td&gt;udp-answers&lt;/td&gt;&lt;td&gt;(\d+)&lt;/td&gt;
+\1</params>
             </step>
             <step>
               <type>CHANGE_PER_SECOND</type>
@@ -315,13 +275,8 @@ webserver-port=8081&#13;
           <preprocessing>
             <step>
               <type>REGEX</type>
-              <params>&lt;td&gt;udp-queries&lt;/td&gt;&lt;td&gt;(.*)
-\0</params>
-            </step>
-            <step>
-              <type>REGEX</type>
-              <params>\d+
-\0</params>
+              <params>&lt;td&gt;udp-queries&lt;/td&gt;&lt;td&gt;(\d+)&lt;/td&gt;
+\1</params>
             </step>
             <step>
               <type>CHANGE_PER_SECOND</type>
@@ -347,13 +302,8 @@ webserver-port=8081&#13;
           <preprocessing>
             <step>
               <type>REGEX</type>
-              <params>&lt;tr&gt;&lt;td&gt;uptime&lt;/td&gt;&lt;td&gt;(.*)
-\0</params>
-            </step>
-            <step>
-              <type>REGEX</type>
-              <params>\d+
-\0</params>
+              <params>&lt;tr&gt;&lt;td&gt;uptime&lt;/td&gt;&lt;td&gt;(\d+)&lt;/td&gt;
+\1</params>
             </step>
           </preprocessing>
           <master_item>
@@ -458,10 +408,12 @@ Please confirm the state.</description>
         <macro>
           <macro>{$SVC_PDNS_SERVER_IP}</macro>
           <value>127.0.0.1</value>
+          <description>IP address of webserver api</description>
         </macro>
         <macro>
           <macro>{$SVC_PDNS_SERVER_PORT}</macro>
           <value>8081</value>
+          <description>PORT of webserver api</description>
         </macro>
       </macros>
       <screens>

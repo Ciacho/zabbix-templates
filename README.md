@@ -8,6 +8,12 @@ This repository provides a set of templates which offers the alternative set of 
 ## Changelog
 ### (devel)
 See ![devel tree](https://github.com/Ciacho/zabbix-templates/tree/devel)
+### 1.0.3
+- **PowerDNS Server**
+  - 1.0.3
+    - Creating a template in a dedicated version for Zabbix 4.4
+    - Creating a template in a dedicated version for Zabbix 4.0, 4.2
+    - Changing regular expression for all items.
 ### 1.0.2
 - **PowerDNS Server**
   - 1.0.2
